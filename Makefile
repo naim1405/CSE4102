@@ -1,4 +1,4 @@
-FILE=calc
+FILE=cCompiler
 
 all:
 	bison -d $(FILE).y
