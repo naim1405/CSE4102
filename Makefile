@@ -1,8 +1,9 @@
-FILE=hello_lex
+FILE=calc
 
 all:
+	bison -d $(FILE).y
 	flex -o $(FILE).yy.c $(FILE).l
-	gcc $(FILE).yy.c -lfl -o $(FILE).out
+	gcc $(FILE).yy.c $(FILE).tab.c -lfl -o $(FILE).out
 	./$(FILE).out < input.txt > output.txt
 
 c:
