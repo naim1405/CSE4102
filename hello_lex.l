@@ -26,7 +26,8 @@ enum yytokentype {
 	OB = 283,
 	CB = 284,
 	ID = 285,
-	ASSIGN = 286
+	ASSIGN = 286,
+	COLON = 287
 
 };
 
@@ -53,7 +54,7 @@ letter [a-zA-z]
 "float" {return FLOAT_TYPE;}
 {digits} {yylval = atoi(yytext); return INT_NUM;}
 {digits}\.{digits} {return FLOAT_NUM;}
-{ws} { }
+{ws} { printf("%s", yytext);}
 "+"  {return ADD;}
 "-"  {return SUB;}
 "*"  {return MUL;}
@@ -70,6 +71,7 @@ letter [a-zA-z]
 ")"  {return CP;}
 "{"  {return OB;}
 "}"  {return CB;}
+";" {return COLON;}
 {letter}({letter}|{digit}|_)* {return ID;}
 . { }
 
@@ -82,16 +84,16 @@ int main(){
 	int token;
 
 	while(token = yylex()){
-		printf("token: %d \n", token);
 		if(token == INT_NUM){
-		printf("int num: %d\n", yylval);
+			printf("%d ", yylval);
 		}
-
 		else if(token == FLOAT_NUM){
-		float num = atof(yytext);
-		printf("int num: %f\n", num);
+			float num = atof(yytext);
+			printf("%f ", num);
 		}
-
+		else{
+			printf("%d ", token);
+		}
 	}
 
 }
