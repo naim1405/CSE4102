@@ -1,10 +1,13 @@
-FILE=cCompiler
+FOLDER=calc
+FILE=calc
+FILE_PATH=$(FOLDER)/$(FILE)
 
 all:
-	bison -d $(FILE).y
-	flex -o $(FILE).yy.c $(FILE).l
-	gcc $(FILE).yy.c $(FILE).tab.c -lfl -o $(FILE).out
-	./$(FILE).out < input.txt > output.txt
+	bison -d $(FILE_PATH).y -o  $(FILE_PATH).tab.c --header=$(FILE_PATH).tab.h
+	flex -o $(FILE_PATH).yy.c $(FILE_PATH).l
+	gcc $(FILE_PATH).yy.c $(FILE_PATH).tab.c -lfl -o $(FILE_PATH).out
+	#./$(FILE_PATH).out < input.txt > output.txt
+	./$(FILE_PATH).out < input.txt > output.txt
 
 c:
-	rm *.c *.out *.h 
+	rm $(FOLDER)/*.c $(FOLDER)/*.out $(FOLDER)/*.h 
